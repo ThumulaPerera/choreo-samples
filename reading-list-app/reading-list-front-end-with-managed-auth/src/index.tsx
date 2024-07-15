@@ -66,7 +66,7 @@ export default function App() {
       toast.error(<>
         <p className="text-[16px] font-bold text-slate-800">Something went wrong !</p>
         <p className="text-[13px] text-slate-400 mt-1">Error Code : {errorCode}<br />Error Description: {errorMessage}</p>
-      </>);    
+      </>);
     }
   }, []);
 
@@ -173,68 +173,70 @@ export default function App() {
               </div>
             </div>
             {readList && (
-              <Tab.Group>
-                <Tab.List className="flex space-x-1 rounded-xl bg-blue-900/20 p-1">
-                  {Object.keys(readList).map((val) => (
-                    <Tab
-                      key={val}
-                      className={({ selected }) =>
-                        classNames(
-                          "w-full rounded-lg py-2.5 text-sm font-medium leading-5 text-blue-700",
-                          "ring-white ring-opacity-60 ring-offset-2 ring-offset-blue-400 focus:outline-none focus:ring-2",
-                          selected
-                            ? "bg-white shadow"
-                            : "text-blue-100 hover:bg-white/[0.12] hover:text-white"
-                        )
-                      }
-                    >
-                      {val}
-                    </Tab>
-                  ))}
-                </Tab.List>
-                <Tab.Panels className="mt-2">
-                  {Object.values(readList).map((books: Book[], idx) => (
-                    <Tab.Panel
-                      key={idx}
-                      className={
-                        isLoading
-                          ? classNames(
-                            "rounded-xl bg-white p-3 ring-white ring-opacity-60 ring-offset-2 ring-offset-blue-400 focus:outline-none focus:ring-2 animate-pulse"
+              <div id="reading-list-group">
+                <Tab.Group>
+                  <Tab.List className="flex space-x-1 rounded-xl bg-blue-900/20 p-1">
+                    {Object.keys(readList).map((val) => (
+                      <Tab
+                        key={val}
+                        className={({ selected }) =>
+                          classNames(
+                            "w-full rounded-lg py-2.5 text-sm font-medium leading-5 text-blue-700",
+                            "ring-white ring-opacity-60 ring-offset-2 ring-offset-blue-400 focus:outline-none focus:ring-2",
+                            selected
+                              ? "bg-white shadow"
+                              : "text-blue-100 hover:bg-white/[0.12] hover:text-white"
                           )
-                          : classNames(
-                            "rounded-xl bg-white p-3 ring-white ring-opacity-60 ring-offset-2 ring-offset-blue-400 focus:outline-none focus:ring-2"
-                          )
-                      }
-                    >
-                      <ul>
-                        {books.map((book) => (
-                          <div className="flex justify-between">
-                            <li
-                              key={book.id}
-                              className="relative rounded-md p-3"
-                            >
-                              <h3 className="text-sm font-medium leading-5">
-                                {book.title}
-                              </h3>
+                        }
+                      >
+                        {val}
+                      </Tab>
+                    ))}
+                  </Tab.List>
+                  <Tab.Panels className="mt-2">
+                    {Object.values(readList).map((books: Book[], idx) => (
+                      <Tab.Panel
+                        key={idx}
+                        className={
+                          isLoading
+                            ? classNames(
+                              "rounded-xl bg-white p-3 ring-white ring-opacity-60 ring-offset-2 ring-offset-blue-400 focus:outline-none focus:ring-2 animate-pulse"
+                            )
+                            : classNames(
+                              "rounded-xl bg-white p-3 ring-white ring-opacity-60 ring-offset-2 ring-offset-blue-400 focus:outline-none focus:ring-2"
+                            )
+                        }
+                      >
+                        <ul>
+                          {books.map((book) => (
+                            <div className="flex justify-between">
+                              <li
+                                key={book.id}
+                                className="relative rounded-md p-3"
+                              >
+                                <h3 className="text-sm font-medium leading-5">
+                                  {book.title}
+                                </h3>
 
-                              <ul className="mt-1 flex space-x-1 text-xs font-normal leading-4 text-gray-500">
-                                <li>{book.author}</li>
-                                <li>&middot;</li>
-                              </ul>
-                            </li>
-                            <button
-                              className="float-right bg-red-500 text-white rounded-md self-center text-xs p-2 mr-2"
-                              onClick={() => handleDelete(book.id!)}
-                            >
-                              Delete
-                            </button>
-                          </div>
-                        ))}
-                      </ul>
-                    </Tab.Panel>
-                  ))}
-                </Tab.Panels>
-              </Tab.Group>
+                                <ul className="mt-1 flex space-x-1 text-xs font-normal leading-4 text-gray-500">
+                                  <li>{book.author}</li>
+                                  <li>&middot;</li>
+                                </ul>
+                              </li>
+                              <button
+                                className="float-right bg-red-500 text-white rounded-md self-center text-xs p-2 mr-2"
+                                onClick={() => handleDelete(book.id!)}
+                              >
+                                Delete
+                              </button>
+                            </div>
+                          ))}
+                        </ul>
+                      </Tab.Panel>
+                    ))}
+                  </Tab.Panels>
+                </Tab.Group>
+              </div>
             )}
             <AddItem isOpen={isAddItemOpen} setIsOpen={setIsAddItemOpen} />
           </div>

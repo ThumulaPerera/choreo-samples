@@ -23,11 +23,12 @@ export const performRequest = async (url: string, options: AxiosRequestConfig<an
   try {
     return await axios(url, options);
   } catch (error) {
-    if (error.response && error.response.status === 401) {
-      // Session has expired. Initiate a login.
-      window.location.href = '/auth/login';
-    } else {
-      throw error;
-    }
+    // if (error.response && error.response.status === 401) {
+    //   // Session has expired. Initiate a login.
+    //   window.location.href = '/auth/login';
+    // } else {
+    //   throw error;
+    // }
+    console.error('Error performing request:', error);
   }
 };
